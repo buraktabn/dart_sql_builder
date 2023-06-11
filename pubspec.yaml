@@ -1,0 +1,19 @@
+name: dart_sql_builder
+description: A flexible and easy-to-use query builder for Dart that simplifies the process of creating complex SQL queries. It currently supports SELECT, INSERT, UPDATE, and DELETE queries with a chainable API, making it easier to build and maintain SQL queries without writing raw SQL strings. The package comes with built-in support for the PostgreSQL driver and offers a foundation for extending it to other database drivers.
+version: 1.0.0-dev
+repository: https://github.com/buraktabn/dart_sql_builder
+issue_tracker: https://github.com/buraktabn/dart_sql_builder/issues
+documentation: https://github.com/buraktabn/dart_sql_builder/blob/main/README.md
+
+environment:
+  sdk: ^3.1.0-11.0.dev
+
+dependencies:
+  benchmark_harness: ^2.2.2
+  collection: ^1.17.2
+  meta: ^1.9.1
+  postgres: ^2.6.1
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
