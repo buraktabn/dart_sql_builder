@@ -2,7 +2,6 @@ part of '_query.dart';
 
 class DeleteQuery<R, TX> extends Query<R, TX>
     with _Where<R, TX>, _Returning<R, TX> {
-  String? _table;
   final List<String> _orderBy = [];
   int? _limit;
   bool _cascade = false;
@@ -10,7 +9,7 @@ class DeleteQuery<R, TX> extends Query<R, TX>
   DeleteQuery({super.databaseDriver}) : super(name: 'DeleteQuery');
 
   void deleteFrom(String table) {
-    _table = table;
+    this.table = table;
   }
 
   void limit(int count) {
@@ -27,7 +26,7 @@ class DeleteQuery<R, TX> extends Query<R, TX>
 
   @override
   String build() {
-    if (_table == null) {
+    if (table == null) {
       throw const DeleteQueryError(
           method: 'build',
           message:
@@ -36,7 +35,7 @@ class DeleteQuery<R, TX> extends Query<R, TX>
 
     final query = StringBuffer();
 
-    query.write('DELETE FROM $_table');
+    query.write('DELETE FROM $table');
 
     if (_condition.isNotEmpty) {
       query.write(' WHERE ${_getWhereString()}');

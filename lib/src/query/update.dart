@@ -2,7 +2,6 @@ part of '_query.dart';
 
 class UpdateQuery<R, TX> extends Query<R, TX>
     with _Where<R, TX>, _Returning<R, TX> {
-  String? _table;
   final List<String> _updateColumns = [];
 
   UpdateQuery({super.databaseDriver}) : super(name: 'UpdateQuery');
@@ -12,7 +11,7 @@ class UpdateQuery<R, TX> extends Query<R, TX>
       throw UpdateQueryError(
           method: 'update', message: 'Table cannot be empty. table: $table');
     }
-    _table = table;
+    this.table = table;
   }
 
   void setSingle(String column, dynamic value) {
@@ -24,7 +23,7 @@ class UpdateQuery<R, TX> extends Query<R, TX>
   }
 
   void set(Map<String, dynamic> rows) {
-    if (_table == null) {
+    if (table == null) {
       throw UpdateQueryError(
           method: 'set',
           message:
@@ -37,7 +36,7 @@ class UpdateQuery<R, TX> extends Query<R, TX>
 
   @override
   String build() {
-    if (_table == null) {
+    if (table == null) {
       throw UpdateQueryError(
           method: 'build',
           message:
@@ -53,7 +52,7 @@ class UpdateQuery<R, TX> extends Query<R, TX>
 
     final query = StringBuffer();
 
-    query.write('UPDATE $_table SET ');
+    query.write('UPDATE $table SET ');
     query.write(_updateColumns.join(', '));
 
     if (_condition.isNotEmpty) {

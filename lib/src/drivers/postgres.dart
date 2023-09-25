@@ -10,6 +10,7 @@ import '_driver.dart';
 typedef QueryMappedResult = List<Map<String, Map<String, dynamic>>>;
 typedef PostgresTx = PostgreSQLExecutionContext;
 
+typedef QueryPostgres = Query<PostgreSQLResult, PostgresTx>;
 typedef SelectQueryPostgres = SelectQuery<PostgreSQLResult, PostgresTx>;
 typedef InsertQueryPostgres = InsertQuery<PostgreSQLResult, PostgresTx>;
 typedef UpdateQueryPostgres = UpdateQuery<PostgreSQLResult, PostgresTx>;

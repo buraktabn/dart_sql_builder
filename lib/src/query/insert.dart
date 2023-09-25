@@ -12,7 +12,6 @@ enum ConflictAction with QueryString {
 }
 
 class InsertQuery<T, TX> extends Query<T, TX> with _Returning<T, TX> {
-  String? _table;
   int _insertCnt = 0;
   final List<String> _columns = [];
   final List<String> _conflictColumns = [];
@@ -23,7 +22,7 @@ class InsertQuery<T, TX> extends Query<T, TX> with _Returning<T, TX> {
 
   @override
   String build() {
-    if (_table == null) {
+    if (table == null) {
       throw const InsertQueryError(
           method: 'build',
           message:
@@ -33,7 +32,7 @@ class InsertQuery<T, TX> extends Query<T, TX> with _Returning<T, TX> {
     final colLen = _columns.length ~/ _insertCnt;
     final query = StringBuffer();
 
-    query.write('INSERT INTO $_table');
+    query.write('INSERT INTO $table');
     query.write(' (${_columns.sublist(0, colLen).join(', ')})');
     query.write(' VALUES');
 
@@ -74,7 +73,7 @@ class InsertQuery<T, TX> extends Query<T, TX> with _Returning<T, TX> {
   }
 
   void into(String tableName) {
-    _table = tableName;
+    this.table = tableName;
   }
 
   void insert(Map<String, dynamic> rows) {

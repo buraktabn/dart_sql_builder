@@ -17,11 +17,13 @@ sealed class Query<R, TX> {
   final String delimiter;
   final DatabaseDriver<R, TX>? databaseDriver;
 
-  Query(
-      {required this.name,
-      this.databaseDriver,
-      this.delimiter = _defaultDelimiter});
+  Query({
+    required this.name,
+    this.databaseDriver,
+    this.delimiter = _defaultDelimiter,
+  });
 
+  String? table;
   final List<dynamic> _values = [];
   int _conditionIndex = 1;
 

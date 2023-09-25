@@ -4,7 +4,6 @@ class SelectQuery<R, TX> extends Query<R, TX> with _Where<R, TX> {
   SelectQuery({super.databaseDriver}) : super(name: 'SelectQuery');
 
   List<String> _columns = [];
-  String _table = '';
   final List<String> _joins = [];
   List<String> _groupBy = [];
   String _having = '';
@@ -32,7 +31,7 @@ class SelectQuery<R, TX> extends Query<R, TX> with _Where<R, TX> {
   }
 
   void from(String table) {
-    _table = table;
+    this.table = table;
   }
 
   void join(String table, String condition,
@@ -75,7 +74,7 @@ class SelectQuery<R, TX> extends Query<R, TX> with _Where<R, TX> {
     final query = StringBuffer();
 
     query.write('SELECT ${_columns.join(',')}');
-    query.write(' FROM $_table');
+    query.write(' FROM $table');
 
     if (_joins.isNotEmpty) {
       query.write(' ${_joins.join(' ')}');
